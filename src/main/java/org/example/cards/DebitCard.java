@@ -6,7 +6,7 @@ public class DebitCard extends BankCard {
     public boolean add(double amount) {
         if (amount > 0) {
             balance += amount;
-            System.out.println("Баланс дебетовой карты пополнен");
+            System.out.printf("Баланс дебетовой карты пополнен на %.2f\n", amount);
             return true;
         } else {
             System.out.println("Некорректная сумма");
@@ -18,7 +18,7 @@ public class DebitCard extends BankCard {
     public boolean pay(double amount) {
         if ((balance - amount) >= 0 && amount > 0) {
             balance -= amount;
-            System.out.println("Оплата с дебетовой карты произведена");
+            System.out.printf("Оплата на %.2f с дебетовой карты произведена\n", amount);
             return true;
         } else {
             System.out.println("Некорректная сумма");

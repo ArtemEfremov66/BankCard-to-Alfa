@@ -14,7 +14,7 @@ public class CreditCard extends BankCard {
     public boolean add(double amount) {
         if (amount > 0) {
             debitCard.balance += amount;
-            System.out.println("Баланс кредитной карты пополнен");
+            System.out.printf("Баланс кредитной карты пополнен на %.2f\n", amount);
             return true;
         } else {
             System.out.println("Некорректная сумма");
@@ -26,7 +26,7 @@ public class CreditCard extends BankCard {
     public boolean pay(double amount) {
         if ((creditLimit <= debitCard.balance - amount) && (amount > 0)) {
             debitCard.balance -= amount;
-            System.out.println("Оплата с кредитной карты произведена");
+            System.out.printf("Оплата на %.2f с кредитной карты произведена\n", amount);
             return true;
         } else {
             System.out.println("Некорректная сумма");
@@ -44,8 +44,11 @@ public class CreditCard extends BankCard {
 
     @Override
     public void getInfo() {
-        System.out.println("Кредитная карта с лимитом: " + creditLimit + "\nТекущий баланс: "+ getBalance()
-        + "На дебетовой карте: " + debitCard.getBalance());
+        System.out.printf("""
+                Кредитная карта с лимитом: %.2f
+                Текущий баланс: %.2f
+                На дебетовой карте: %.2f
+                """, creditLimit, getBalance(), debitCard.getBalance());
     }
 
 

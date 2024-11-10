@@ -1,7 +1,7 @@
 package org.example.cards;
 
 public abstract class BankCard {
-    protected double balance = 0;
+    public double balance = 0;
 
     public BankCard() {
     }

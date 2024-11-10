@@ -1,8 +1,12 @@
-package org.example.cards;
+package org.example.cards.bonusCard;
+
+import org.example.cards.CreditCard;
+import org.example.cards.DebitCard;
 
 public class CreditCardPiggyBank extends CreditCard {
     private final DebitCard debitCard;
     private final double creditLimit;
+    private final double PERCENT = 0.005;
 
     public CreditCardPiggyBank(double creditLimit, DebitCard debitCard) {
         super(creditLimit, debitCard);
@@ -14,8 +18,8 @@ public class CreditCardPiggyBank extends CreditCard {
 
     @Override
     public boolean add(double amount) {
-        double toPiggyBank = amount* 0.005;
-        super.add(amount-toPiggyBank);
+        double toPiggyBank = amount * PERCENT;
+        super.add(amount - toPiggyBank);
         piggyBank += toPiggyBank;
         return true;
     }
@@ -24,19 +28,24 @@ public class CreditCardPiggyBank extends CreditCard {
         if (piggyBank >= amount) {
             debitCard.balance += amount;
             piggyBank -= amount;
-            System.out.println("Сумма из копилки переведена на карту");
+            System.out.printf("Сумма %.2f из копилки переведена на карту\n", amount);
         } else {
             System.out.println("Некорректная сумма");
         }
     }
+
     public double getPiggyBank() {
         return piggyBank;
     }
 
     @Override
     public void getInfo() {
-        System.out.println("Кредитная карта с копилкой, баланс: " + getBalance() + "\n" + "Кредитный лимит: " +
-                creditLimit + "\n" + "На дебетовой карте: " + debitCard.getBalance() + "\n" +
-                "В копилке на данный момент: " + piggyBank + "\nУсловия пополнения копилки: 0,5% с пополнений");
+        System.out.printf("""
+                Кредитная карта с копилкой, баланс: %.2f
+                Кредитный лимит: %.2f
+                На дебетовой карте: %.2f
+                В копилке на данный момент: %.2f
+                Условия пополнения копилки: %.2f%% с пополнений
+                """, getBalance(), creditLimit, debitCard.getBalance(), piggyBank, PERCENT * 100);
     }
 }
